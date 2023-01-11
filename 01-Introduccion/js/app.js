@@ -1,5 +1,5 @@
-alert("Hola mundo")
-console.log("Hola mundo")
+alert("Hola mundo");
+console.log("Hola mundo");
 // comentario en una sola linea
 
 /* 
