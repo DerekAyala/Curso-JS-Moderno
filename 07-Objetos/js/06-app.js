@@ -14,5 +14,6 @@ const producto = {
     }
 };
 
-const { pais } = producto.informacion.fabricacion;
+const { informacion: { medidas: {medida},fabricacion:{pais} } } = producto;
 console.log(pais);
+console.log(medida)
