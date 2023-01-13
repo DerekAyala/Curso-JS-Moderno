@@ -14,6 +14,7 @@ const producto3 = {
 }
 
 const carrito = [producto, producto2,producto3];
+
 const [ , , tercero ] = carrito;
 const [ , ...segundo ] = carrito;
 
