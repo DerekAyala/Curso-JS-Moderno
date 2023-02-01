@@ -8,21 +8,23 @@ document.addEventListener('DOMContentLoaded', function(){
     const inputEmail = document.querySelector('#email');
     const inputAsunto = document.querySelector('#asunto');
     const inputMensaje = document.querySelector('#mensaje');
-    const btnEnviar = document.querySelector('.bg-pink-600');
+    const btnEnviar = document.querySelector('#formulario button[type="submit"]');
 
-
-    inputEmail.addEventListener('blur', validar);
-    inputAsunto.addEventListener('blur', validar);
-    inputMensaje.addEventListener('blur', validar);
+    inputEmail.addEventListener('input', validar);
+    inputAsunto.addEventListener('input', validar);
+    inputMensaje.addEventListener('input', validar);
     
-    console.log(btnEnviar);
     function validar(e) {
         if (e.target.value.trim() === '') {
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();
             return;
         }
         if (e.target.id === 'email' && !validarEmail(e.target.value)) {
             mostrarAlerta('El email no es valido', e.target.parentElement);
+            email[e.target.name] = '';
+            comprobarEmail();
             return;
         }
         limpiarAlerta(e.target.parentElement);
@@ -56,9 +58,12 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     function comprobarEmail(){
-        if (!Object.values(email).includes('')) {
-            // btnEnviar.removeAttribute('disabled');
-            // btnEnviar.classList.remove('opacity-50');
+        if (Object.values(email).includes('')) {
+            btnEnviar.disabled = true
+            btnEnviar.classList.add('opacity-50');
+            return;
         }
+        btnEnviar.disabled = false;
+        btnEnviar.classList.remove('opacity-50');
     }
 });
