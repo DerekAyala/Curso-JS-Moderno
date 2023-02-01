@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', function(){
+    const email = {
+        email: '',
+        asunto: '',
+        mensaje: ''
+    };
     // seleccionar los elementos de la interfaz
     const inputEmail = document.querySelector('#email');
     const inputAsunto = document.querySelector('#asunto');
     const inputMensaje = document.querySelector('#mensaje');
+    const btnEnviar = document.querySelector('.bg-pink-600');
+
 
     inputEmail.addEventListener('blur', validar);
     inputAsunto.addEventListener('blur', validar);
     inputMensaje.addEventListener('blur', validar);
-
+    
+    console.log(btnEnviar);
     function validar(e) {
         if (e.target.value.trim() === '') {
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
@@ -18,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function(){
             return;
         }
         limpiarAlerta(e.target.parentElement);
+
+        //asignar los valores
+        email[e.target.name] = e.target.value.trim().toLowerCase();
+
+        comprobarEmail();
     }
 
     function mostrarAlerta(mensaje, referencia){
@@ -40,5 +53,12 @@ document.addEventListener('DOMContentLoaded', function(){
         const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
         const resultado = regex.test(email);
         return resultado;
+    }
+
+    function comprobarEmail(){
+        if (!Object.values(email).includes('')) {
+            // btnEnviar.removeAttribute('disabled');
+            // btnEnviar.classList.remove('opacity-50');
+        }
     }
 });
